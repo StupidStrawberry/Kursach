@@ -1,0 +1,332 @@
+:root {
+    --bg-color: #f6f1f1;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-color: #333;
+    --primary-gradient: linear-gradient(135deg, #6c63ff, #a084ca);
+}
+
+body.dark-theme {
+    --bg-color: #1e1e2f;
+    --card-bg: rgba(40, 40, 60, 0.85);
+    --text-color: #eee;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: var(--primary-gradient);
+    padding: 25px 40px;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: stretch;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-row label {
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+input[type="url"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+form button {
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.logo-img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    animation: rotate-in 1s ease;
+}
+
+nav a {
+    margin-left: 25px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    opacity: 0.85;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.content-box {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 1000px;
+    width: 100%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    animation: fade-in 1s ease;
+    text-align: center;
+}
+
+.content-box-form {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    animation: fade-in 1s ease;
+    text-align: center;
+}
+
+.content-box h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.content-box h2 {
+    margin: 20px 0 10px;
+}
+
+.lead {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.features-list {
+    list-style: none;
+    text-align: left;
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+.features-list li {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.icons {
+    margin: 20px 0;
+}
+
+.icons img {
+    width: 50px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+}
+
+.icons img:hover {
+    transform: scale(1.1);
+}
+
+/* Кнопки */
+button,
+.cta-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: var(--primary-gradient);
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover,
+.cta-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+}
+
+button:active,
+.cta-button:active {
+    transform: scale(0.98);
+}
+
+.form-links {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-links a {
+    color: #5555ff;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.form-links a:hover {
+    text-decoration: underline;
+}
+
+body.dark-theme input {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: white;
+    border: 1px solid #555;
+}
+
+input {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    transition: 0.3s ease;
+    display: block;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #8888ff;
+    box-shadow: 0 0 5px rgba(136, 136, 255, 0.5);
+}
+
+body.dark-theme input:focus {
+    border-color: #aaaaff;
+    box-shadow: 0 0 5px rgba(170, 170, 255, 0.5);
+}
+
+body.dark-theme .form-links a {
+    color: #aaaaff;
+}
+
+footer {
+    background-color: #ddd;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+}
+
+footer button {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.logout-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #ff4e50, #f00000);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: linear-gradient(to right, #e00000, #b00000);
+}
+
+.success-message {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #2e7d32;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fade-in-out 2.5s ease forwards;
+}
+
+/* Анимации */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotate-in {
+    from { transform: rotate(-180deg); opacity: 0; }
+    to { transform: rotate(0deg); opacity: 1; }
+}
+
+@keyframes fade-in-out {
+    0%   { opacity: 0; transform: translateY(-10px); }
+    10%  { opacity: 1; transform: translateY(0); }
+    90%  { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); display: none; }
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .content-box {
+        margin: 0 10px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .features-list {
+        text-align: left;
+    }
+}

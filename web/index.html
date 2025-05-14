@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="logo.png" type="image/png">
+    <title>Главная — MessageForwarder</title>
+    <link rel="stylesheet" href="style_main.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span>MessageForwarder</span>
+        </div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="#" onclick="redirectToProfile()">Личный кабинет</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="content-box">
+        <h1>Переадресация сообщений — удобно и просто</h1>
+        <p class="lead">Получайте сообщения из Telegram во ВКонтакте или других соцсетях, где вам удобнее.</p>
+
+        <h2>Что мы предлагаем:</h2>
+        <ul class="features-list">
+            <li>⚡ Мгновенная переотправка сообщений</li>
+            <li>🔐 Безопасность и конфиденциальность</li>
+            <li>📱 Интеграции: Telegram, VK, WhatsApp (в разработке)</li>
+            <li>🧠 Умные фильтры: выбирайте, что переадресовать</li>
+        </ul>
+
+        <div class="icons">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968835.png" alt="VK">
+        </div>
+
+        <a href="login.html" class="cta-button">Начать использовать</a>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 MessageForwarder</p>
+    <button id="theme-toggle">Сменить тему</button>
+</footer>
+
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+    });
+
+    // Автозагрузка сохранённой темы
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    });
+
+    function redirectToProfile() {
+        const username = document.cookie.match(/username=/);
+        if (username) {
+            window.location.href = 'profile.html';
+        } else {
+            window.location.href = 'register.html';
+        }
+    }
+</script>
+</body>
+</html>
