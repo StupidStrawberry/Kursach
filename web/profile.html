@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="logo.png" type="image/png">
     <title>Личный кабинет — MessageForwarder</title>
     <link rel="stylesheet" href="style_main.css">
+    <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
 <header>
@@ -28,135 +28,162 @@
         <button id="logout-button" class="logout-btn">Выйти</button>
 
         <form id="settings-form">
-        <h2>Настройки переадресации</h2>
+            <h2>Настройки переадресации</h2>
 
-        <p>Telegram</p>
+            <p>Telegram</p>
 
-        <div class="form-row">
-            <label for="tg_api_id">API ID:</label>
-            <input type="text" id="tg_api_id" name="tg_api_id" placeholder="Например, 123456" required>
-        </div>
+            <div class="form-row">
+                <label for="tg_username">Username:</label>
+                <input type="text" id="tg_username" name="tg_username" placeholder="Например, myusername" required>
+            </div>
 
-        <div class="form-row">
-            <label for="tg_api_hash">API HASH:</label>
-            <input type="text" id="tg_api_hash" name="tg_api_hash" placeholder="Пример: a1b2c3d4e5f6..." required>
-        </div>
+            <div class="form-row">
+                <label for="tg_api_id">API ID:</label>
+                <div class="input-with-button">
+                    <input type="text" id="tg_api_id" name="tg_api_id" placeholder="123456" required>
+                    <button type="button" class="help-button" data-modal="tg_api_id_modal">Как получить?</button>
+                </div>
+            </div>
 
-        <div class="form-row">
-            <label for="tg_phone">Телефон:</label>
-            <input type="tel" id="tg_phone" name="tg_phone" placeholder="+79991234567" pattern="\+\d{11}" required>
-        </div>
+            <div class="form-row">
+                <label for="tg_api_id">API HASH:</label>
+                <div class="input-with-button">
+                    <input type="text" id="tg_api_hash" name="tg_api_hash" placeholder="a1b2c3d4e5..." required>
+                    <button type="button" class="help-button" data-modal="tg_api_hash_modal">Как получить?</button>
+                </div>
+            </div>
 
-        <p>ВКонтакте</p>
+            <div class="form-row">
+                <label for="tg_phone">Телефон:</label>
+                <input type="tel" id="tg_phone" name="tg_phone" placeholder="+79991234567" pattern="\+\d{11}" required>
+            </div>
 
-        <div class="form-row">
-            <label for="vk_token">Токен доступа:</label>
-            <input type="text" id="vk_token" name="vk_token" placeholder="vk1.aAbCDeF..." required>
-        </div>
+            <p>ВКонтакте</p>
 
-    <button type="submit">Сохранить</button>
-    <div id="success-message" class="success-message">Настройки успешно сохранены!</div>
+            <div class="form-row">
+                <label for="vk_id">VK ID:</label>
+                <input type="text" id="vk_id" name="vk_id" placeholder="Например, myvkid" required>
+            </div>
+            
+            <div class="form-row">
+                <label for="tg_api_id">Токен доступа:</label>
+                <div class="input-with-button">
+                    <input type="text" id="vk_token" name="vk_token" placeholder="vk1.aAbCDeF..." required>
+                    <button type="button" class="help-button" data-modal="vk_token_modal">Как получить?</button>
+                </div>
+            </div>
+
+            <button type="submit">Сохранить</button>
+            <div id="success-message" class="success-message">Настройки успешно сохранены!</div>
         </form>
     </div>
-
-    </main>
+</main>
 
 <footer>
     <p>&copy; 2025 MessageForwarder</p>
     <button id="theme-toggle">Сменить тему</button>
 </footer>
 
-<script>
-    // Тема
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-        localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-    });
-    
-    // Валидация
-    function validateForm() {
-        const apiId = document.getElementById('tg_api_id').value.trim();
-        const apiHash = document.getElementById('tg_api_hash').value.trim();
-        const phone = document.getElementById('tg_phone').value.trim();
-        const vkToken = document.getElementById('vk_token').value.trim();
+<!-- Модальные окна -->
+<div class="modal-overlay" id="modal-overlay"></div>
 
-        const errors = [];
+<div class="modal" id="tg_api_id_modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Как получить API ID Telegram?</h2>
+        <div class="carousel">
+            <div class="carousel-slide active">
+                <h3>Шаг 1: Перейдите на сайт разработчиков Telegram</h3>
+                <p>Откройте <a href="https://my.telegram.org/auth" target="_blank">my.telegram.org</a> и авторизуйтесь по своему номеру телефона</p>
+                <img src="tg1.png" alt="Шаг 1">
+            </div>
+            <div class="carousel-slide">
+                <h3>Шаг 2: Перейдите на создание нового приложения</h3>
+                <p>После авторизации нажмите на "API development tools"</p>
+                <img src="tg2.png" alt="Шаг 2">
+            </div>
+            <div class="carousel-slide">
+                <h3>Шаг 3: Создайте новое приложение</h3>
+                <p>В разделе "API development tools" заполните основные данные (можете повторить их с примера)</p>
+                <img src="tg3.png" alt="Шаг 3">
+            </div>
+            <div class="carousel-slide">
+                <h3>Шаг 4: Скопируйте нужную информацию</h3>
+                <p>В разделе "App configuration" скопируйте Ваш API ID</p>
+                <img src="tg4.jpg" alt="Шаг 4">
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="prev-btn">Назад</button>
+            <span class="slide-counter">1/2</span>
+            <button class="next-btn">Далее</button>
+        </div>
+    </div>
+</div>
 
-        if (!/^\d+$/.test(apiId)) {
-            errors.push("API ID должен содержать только цифры.");
-        }
+<div class="modal" id="tg_api_hash_modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Как получить API HASH Telegram?</h2>
+        <div class="carousel">
+            <div class="carousel-slide active">
+                <h3>Шаг 1: Перейдите на сайт разработчиков Telegram</h3>
+                <p>Откройте <a href="https://my.telegram.org/auth" target="_blank">my.telegram.org</a> и авторизуйтесь по своему номеру телефона</p>
+                <img src="tg1.png" alt="Шаг 1">
+            </div>
+            <div class="carousel-slide">
+                <h3>Шаг 2: Перейдите на создание нового приложения</h3>
+                <p>После авторизации нажмите на "API development tools"</p>
+                <img src="tg2.png" alt="Шаг 2">
+            </div>
+            <div class="carousel-slide">
+                <h3>Шаг 3: Создайте новое приложение</h3>
+                <p>В разделе "API development tools" заполните основные данные (можете повторить их с примера)</p>
+                <img src="tg3.png" alt="Шаг 3">
+            </div>
+            <div class="carousel-slide">
+                <h3>Шаг 4: Скопируйте нужную информацию</h3>
+                <p>В разделе "App configuration" скопируйте Ваш API HASH</p>
+                <img src="tg4.jpg" alt="Шаг 4">
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="prev-btn">Назад</button>
+            <span class="slide-counter">1/2</span>
+            <button class="next-btn">Далее</button>
+        </div>
+    </div>
+</div>
 
-        if (!/^[a-zA-Z0-9]+$/.test(apiHash) || apiHash.length < 10) {
-            errors.push("API HASH должен быть не менее 10 символов и содержать только латинские буквы и цифры.");
-        }
+<div class="modal" id="vk_token_modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Как получить VK токен доступа?</h2>
+        <div class="carousel">
+            <div class="carousel-slide active">
+                <h3>Шаг 1: Перейдите на сайт VK HOST</h3>
+                <p>Откройте <a href="https://vkhost.github.io/" target="_blank">vkhost.github.io/</a> и выберете "VK Admin"</p>
+                <img src="vk1.png" alt="Шаг 1">
+            </div>
+            <div class="carousel-slide">
+                <h3>Шаг 2: Разрешите доступ к Вашему аккаунту</h3>
+                <p>После авторизации нажмите "Разрешить" в конце страницы</p>
+                <img src="vk2.png" alt="Шаг 2">
+            </div>
+            <div class="carousel-slide">
+                <h3>Шаг 3: Скопируйте Ваш токен</h3>
+                <p>В адресной строке скопируйте Ваш VK Token (он имеет вид vk1.****)</p>
+                <img src="vk3.png" alt="Шаг 3">
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="prev-btn">Назад</button>
+            <span class="slide-counter">1/2</span>
+            <button class="next-btn">Далее</button>
+        </div>
+    </div>
+</div>
 
-        if (!/^\+\d{11}$/.test(phone)) {
-            errors.push("Телефон должен быть в формате +79991234567.");
-        }
-
-        if (!/^vk1\.[a-zA-Z0-9]{25,}$/.test(vkToken)) {
-            errors.push("VK токен должен начинаться с 'vk1.' и быть длиной не менее 30 символов.");
-        }
-
-        if (errors.length > 0) {
-            alert("Ошибки:\n" + errors.join("\n"));
-            return false;
-        }
-
-        return true;
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-theme');
-        }
-
-        // Проверка авторизации через куки
-        const username = getCookie('username');
-        const userId = getCookie('user_id');
-
-        if (!username || !userId) {
-            window.location.href = 'register.html';
-        } else {
-            document.getElementById('username').textContent = username;
-            document.getElementById('user-id').textContent = userId;
-        }
-    });
-
-    // Чтение куки
-    function getCookie(name) {
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? match[2] : null;
-    }
-
-    // Псевдо-сохранение с валидацией
-    document.getElementById('settings-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    if (!validateForm()) {
-        return;
-    }
-
-    const message = document.getElementById('success-message');
-    message.style.display = 'block';
-
-    setTimeout(() => {
-        message.style.display = 'none';
-    }, 2500);
-    });
-
-    // Выход из ЛК
-    function deleteCookie(name) {
-    document.cookie = name + '=; Max-Age=0; path=/;';
-    }
-
-    document.getElementById('logout-button').addEventListener('click', function() {
-        deleteCookie('session');
-        deleteCookie('username');
-        deleteCookie('user_id');
-        localStorage.clear();
-        window.location.href = "index.html"; 
-    });
-</script>
+<script src="script.js"></script>
 </body>
 </html>
