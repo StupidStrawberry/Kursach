@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="logo.png" type="image/png">
+    <title>Забыли пароль — MessageForwarder</title>
+    <link rel="stylesheet" href="style_main.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span>MessageForwarder</span>
+        </div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="login.html">Личный кабинет</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="content-box-form">
+        <h1>Восстановление пароля</h1>
+        <p>Введите ваш email, чтобы восстановить пароль:</p>
+        <form action="#" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Отправить ссылку</button>
+        </form>
+        <div class="form-links">
+            <a href="login.html">Назад к входу</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 MessageForwarder</p>
+    <button id="theme-toggle">Сменить тему</button>
+</footer>
+
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    });
+</script>
+</body>
+</html>
