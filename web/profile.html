@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="logo.png" type="image/png">
+    <title>Личный кабинет — MessageForwarder</title>
+    <link rel="stylesheet" href="style_main.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span>MessageForwarder</span>
+        </div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="profile.html">Личный кабинет</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="content-box-form">
+        <h1>Ваш профиль</h1><br>
+        <p><strong>Имя пользователя:</strong> <span id="username">—</span></p>
+        <p><strong>ID:</strong> <span id="user-id">—</span></p>
+        <button id="logout-button" class="logout-btn">Выйти</button>
+
+        <form id="settings-form">
+        <h2>Настройки переадресации</h2>
+
+        <p>Telegram</p>
+
+        <div class="form-row">
+            <label for="tg_api_id">API ID:</label>
+            <input type="text" id="tg_api_id" name="tg_api_id" placeholder="Например, 123456" required>
+        </div>
+
+        <div class="form-row">
+            <label for="tg_api_hash">API HASH:</label>
+            <input type="text" id="tg_api_hash" name="tg_api_hash" placeholder="Пример: a1b2c3d4e5f6..." required>
+        </div>
+
+        <div class="form-row">
+            <label for="tg_phone">Телефон:</label>
+            <input type="tel" id="tg_phone" name="tg_phone" placeholder="+79991234567" pattern="\+\d{11}" required>
+        </div>
+
+        <p>ВКонтакте</p>
+
+        <div class="form-row">
+            <label for="vk_token">Токен доступа:</label>
+            <input type="text" id="vk_token" name="vk_token" placeholder="vk1.aAbCDeF..." required>
+        </div>
+
+    <button type="submit">Сохранить</button>
+    <div id="success-message" class="success-message">Настройки успешно сохранены!</div>
+        </form>
+    </div>
+
+    </main>
+
+<footer>
+    <p>&copy; 2025 MessageForwarder</p>
+    <button id="theme-toggle">Сменить тему</button>
+</footer>
+
+<script>
+    // Тема
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+    });
+    
+    // Валидация
+    function validateForm() {
+        const apiId = document.getElementById('tg_api_id').value.trim();
+        const apiHash = document.getElementById('tg_api_hash').value.trim();
+        const phone = document.getElementById('tg_phone').value.trim();
+        const vkToken = document.getElementById('vk_token').value.trim();
+
+        const errors = [];
+
+        if (!/^\d+$/.test(apiId)) {
+            errors.push("API ID должен содержать только цифры.");
+        }
+
+        if (!/^[a-zA-Z0-9]+$/.test(apiHash) || apiHash.length < 10) {
+            errors.push("API HASH должен быть не менее 10 символов и содержать только латинские буквы и цифры.");
+        }
+
+        if (!/^\+\d{11}$/.test(phone)) {
+            errors.push("Телефон должен быть в формате +79991234567.");
+        }
+
+        if (!/^vk1\.[a-zA-Z0-9]{25,}$/.test(vkToken)) {
+            errors.push("VK токен должен начинаться с 'vk1.' и быть длиной не менее 30 символов.");
+        }
+
+        if (errors.length > 0) {
+            alert("Ошибки:\n" + errors.join("\n"));
+            return false;
+        }
+
+        return true;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        // Проверка авторизации через куки
+        const username = getCookie('username');
+        const userId = getCookie('user_id');
+
+        if (!username || !userId) {
+            window.location.href = 'register.html';
+        } else {
+            document.getElementById('username').textContent = username;
+            document.getElementById('user-id').textContent = userId;
+        }
+    });
+
+    // Чтение куки
+    function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+    }
+
+    // Псевдо-сохранение с валидацией
+    document.getElementById('settings-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (!validateForm()) {
+        return;
+    }
+
+    const message = document.getElementById('success-message');
+    message.style.display = 'block';
+
+    setTimeout(() => {
+        message.style.display = 'none';
+    }, 2500);
+    });
+
+    // Выход из ЛК
+    function deleteCookie(name) {
+    document.cookie = name + '=; Max-Age=0; path=/;';
+    }
+
+    document.getElementById('logout-button').addEventListener('click', function() {
+        deleteCookie('session');
+        deleteCookie('username');
+        deleteCookie('user_id');
+        localStorage.clear();
+        window.location.href = "index.html"; 
+    });
+</script>
+</body>
+</html>
